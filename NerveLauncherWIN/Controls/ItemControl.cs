@@ -14,9 +14,13 @@ namespace NerveLauncherWIN.Controls
 {
     public partial class ItemControl : UserControl
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string ImageLink { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string Title { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string PACKAGE {  get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public NervePackage NervePackage { get; set; }
         public ItemControl()
         {

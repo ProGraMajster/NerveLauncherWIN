@@ -37,23 +37,21 @@
             // pictureBox1
             // 
             pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = Properties.Resources.nerve_app_icon;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(500, 520);
+            pictureBox1.Size = new Size(240, 240);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            pictureBox1.Visible = false;
             // 
             // label1
             // 
             label1.BackColor = Color.Black;
             label1.Dock = DockStyle.Bottom;
             label1.ForeColor = Color.FromArgb(224, 224, 224);
-            label1.Location = new Point(0, 476);
+            label1.Location = new Point(0, 196);
             label1.Name = "label1";
-            label1.Size = new Size(500, 21);
+            label1.Size = new Size(240, 21);
             label1.TabIndex = 1;
             label1.Text = "Updating...";
             label1.TextAlign = ContentAlignment.MiddleLeft;
@@ -63,9 +61,9 @@
             // 
             progressBar1.BackColor = Color.Black;
             progressBar1.Dock = DockStyle.Bottom;
-            progressBar1.Location = new Point(0, 497);
+            progressBar1.Location = new Point(0, 217);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(500, 23);
+            progressBar1.Size = new Size(240, 23);
             progressBar1.Style = ProgressBarStyle.Marquee;
             progressBar1.TabIndex = 2;
             progressBar1.Visible = false;
@@ -74,7 +72,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(500, 520);
+            ClientSize = new Size(240, 240);
             Controls.Add(label1);
             Controls.Add(progressBar1);
             Controls.Add(pictureBox1);

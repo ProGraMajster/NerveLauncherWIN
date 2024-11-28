@@ -30,7 +30,7 @@
         {
             label1 = new Label();
             progressBar1 = new ProgressBar();
-            label2 = new Label();
+            labelStatus = new Label();
             SuspendLayout();
             // 
             // label1
@@ -54,24 +54,24 @@
             progressBar1.Style = ProgressBarStyle.Marquee;
             progressBar1.TabIndex = 3;
             // 
-            // label2
+            // labelStatus
             // 
-            label2.AutoSize = true;
-            label2.Dock = DockStyle.Bottom;
-            label2.Location = new Point(0, 63);
-            label2.Name = "label2";
-            label2.Padding = new Padding(10, 0, 0, 0);
-            label2.Size = new Size(211, 15);
-            label2.TabIndex = 4;
-            label2.Text = "Sprawdzanie dostępności aktualizacji";
-            label2.TextAlign = ContentAlignment.MiddleLeft;
+            labelStatus.AutoSize = true;
+            labelStatus.Dock = DockStyle.Bottom;
+            labelStatus.Location = new Point(0, 63);
+            labelStatus.Name = "labelStatus";
+            labelStatus.Padding = new Padding(10, 0, 0, 0);
+            labelStatus.Size = new Size(211, 15);
+            labelStatus.TabIndex = 4;
+            labelStatus.Text = "Sprawdzanie dostępności aktualizacji";
+            labelStatus.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(380, 101);
-            Controls.Add(label2);
+            Controls.Add(labelStatus);
             Controls.Add(progressBar1);
             Controls.Add(label1);
             DoubleBuffered = true;
@@ -88,6 +88,6 @@
 
         private Label label1;
         private ProgressBar progressBar1;
-        private Label label2;
+        private Label labelStatus;
     }
 }

@@ -31,7 +31,7 @@
             panelEx1 = new Controls.PanelEx();
             flowLayoutPanelEx1 = new Controls.FlowLayoutPanelEx();
             panelEx5 = new Controls.PanelEx();
-            flowLayoutPanelEx2 = new Controls.FlowLayoutPanelEx();
+            flowLayoutPanelContentApp = new Controls.FlowLayoutPanelEx();
             label1 = new Label();
             panelEx8 = new Controls.PanelEx();
             flowLayoutPanelEx3 = new Controls.FlowLayoutPanelEx();
@@ -45,6 +45,7 @@
             textBox1 = new TextBox();
             buttonEx2 = new Controls.ButtonEx();
             buttonEx1 = new Controls.ButtonEx();
+            button1 = new Button();
             panelEx1.SuspendLayout();
             flowLayoutPanelEx1.SuspendLayout();
             panelEx5.SuspendLayout();
@@ -84,7 +85,7 @@
             // panelEx5
             // 
             panelEx5.BackColor = Color.FromArgb(25, 25, 25);
-            panelEx5.Controls.Add(flowLayoutPanelEx2);
+            panelEx5.Controls.Add(flowLayoutPanelContentApp);
             panelEx5.Controls.Add(label1);
             panelEx5.Dock = DockStyle.Top;
             panelEx5.Location = new Point(23, 23);
@@ -94,15 +95,15 @@
             panelEx5.Size = new Size(850, 193);
             panelEx5.TabIndex = 2;
             // 
-            // flowLayoutPanelEx2
+            // flowLayoutPanelContentApp
             // 
-            flowLayoutPanelEx2.BackColor = Color.FromArgb(22, 22, 22);
-            flowLayoutPanelEx2.Dock = DockStyle.Bottom;
-            flowLayoutPanelEx2.Location = new Point(10, 53);
-            flowLayoutPanelEx2.Name = "flowLayoutPanelEx2";
-            flowLayoutPanelEx2.Padding = new Padding(10, 2, 0, 0);
-            flowLayoutPanelEx2.Size = new Size(830, 130);
-            flowLayoutPanelEx2.TabIndex = 1;
+            flowLayoutPanelContentApp.BackColor = Color.FromArgb(22, 22, 22);
+            flowLayoutPanelContentApp.Dock = DockStyle.Bottom;
+            flowLayoutPanelContentApp.Location = new Point(10, 53);
+            flowLayoutPanelContentApp.Name = "flowLayoutPanelContentApp";
+            flowLayoutPanelContentApp.Padding = new Padding(10, 2, 0, 0);
+            flowLayoutPanelContentApp.Size = new Size(830, 130);
+            flowLayoutPanelContentApp.TabIndex = 1;
             // 
             // label1
             // 
@@ -266,20 +267,32 @@
             buttonEx1.UseVisualStyleBackColor = true;
             buttonEx1.Visible = false;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.Black;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(0, 0);
+            button1.Name = "button1";
+            button1.Size = new Size(5, 5);
+            button1.TabIndex = 5;
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(949, 538);
+            Controls.Add(button1);
             Controls.Add(panelEx1);
             DoubleBuffered = true;
             Name = "FormMain";
-            Text = "FormMain";
+            Text = "NerveLauncher";
             FormClosed += FormMain_FormClosed;
             Load += FormMain_Load;
             ResizeBegin += FormMain_ResizeBegin;
             ResizeEnd += FormMain_ResizeEnd;
-            KeyDown += FormMain_KeyDown;
             panelEx1.ResumeLayout(false);
             flowLayoutPanelEx1.ResumeLayout(false);
             panelEx5.ResumeLayout(false);
@@ -308,8 +321,9 @@
         private Controls.FlowLayoutPanelEx flowLayoutPanelEx1;
         private Controls.PanelEx panelEx8;
         private Label label3;
-        private Controls.FlowLayoutPanelEx flowLayoutPanelEx2;
+        private Controls.FlowLayoutPanelEx flowLayoutPanelContentApp;
         private TextBox textBox1;
         private Controls.FlowLayoutPanelEx flowLayoutPanelEx3;
+        private Button button1;
     }
 }

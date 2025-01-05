@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "NerveLauncherWIN": {
+      "commandName": "Project"
+    },
+    "RunNerveLauncher": {
+      "commandName": "Project",
+      "commandLineArgs": "-RunNerveLauncher"
+    }
+  }
+}

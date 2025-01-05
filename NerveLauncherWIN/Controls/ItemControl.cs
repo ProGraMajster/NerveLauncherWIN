@@ -15,16 +15,42 @@ namespace NerveLauncherWIN.Controls
     public partial class ItemControl : UserControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public string ImageLink { get; set; }
+        public string ImageLink { get; set; } = String.Empty;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public string Title { get; set; }
+        public string Title { get; set; } = String.Empty;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public string PACKAGE {  get; set; }
+        public string PACKAGE {  get; set; } = string.Empty;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public NervePackage NervePackage { get; set; }
+        public NervePackage NervePackage { get; set; } = null;
         public ItemControl()
         {
             InitializeComponent();
+        }
+        public ItemControl(string title, string imagelink, string package)
+        {
+            InitializeComponent();
+            try
+            {
+                if (!string.IsNullOrEmpty(title))
+                {
+                    Title = title;
+                    labelNamePackage.Text = title;
+                }
+                if (!string.IsNullOrEmpty(package))
+                {
+                    PACKAGE = package;
+                }
+                if (!string.IsNullOrEmpty(imagelink))
+                {
+                    ImageLink = imagelink;
+                    pictureBoxImagePackage.ImageLocation = imagelink;
+                }
+                
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         public ItemControl(NervePackage package)
@@ -35,12 +61,12 @@ namespace NerveLauncherWIN.Controls
 
         private void pictureBoxImagePackage_Click(object sender, EventArgs e)
         {
-            OpenPage();
+            OpenPage(PACKAGE);
         }
 
-        void OpenPage()
+        void OpenPage(string PackageIdentifier)
         {
-            NerveLauncherWIN.Pages.PageViewItem pageViewItem = new Pages.PageViewItem();
+            NerveLauncherWIN.Pages.PageViewItem pageViewItem = new Pages.PageViewItem(PackageIdentifier);
             pageViewItem.Dock = DockStyle.Fill;
             FormMain formMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
             if (formMain == null)
@@ -53,7 +79,7 @@ namespace NerveLauncherWIN.Controls
 
         private void ItemControl_Click(object sender, EventArgs e)
         {
-            OpenPage();
+            OpenPage(PACKAGE);
         }
     }
 }

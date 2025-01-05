@@ -7,13 +7,13 @@ namespace NerveLauncherWIN
         public FormUpdate()
         {
             InitializeComponent();
-            
+
             try
             {
                 Image image = Image.FromFile("Resources\\Img\\nerve_app_icon.png");
                 pictureBox1.Image = image;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
@@ -30,6 +30,7 @@ namespace NerveLauncherWIN
 #else
                 p = Process.Start("NerveLauncherWIN.Updater.exe");
 #endif
+                Application.Exit();
             }
             catch (Exception ex)
             {

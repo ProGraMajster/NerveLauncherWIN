@@ -1,15 +1,16 @@
-﻿using NerveLauncherWIN.Dev;
+﻿using NerveLauncherWIN.Controls;
+using NerveLauncherWIN.Dev;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Windows.UI.Input;
 
 namespace NerveLauncherWIN
 {
@@ -91,15 +92,17 @@ namespace NerveLauncherWIN
         private void FormMain_Load(object sender, EventArgs e)
         {
             ContentManager.Init();
+            ItemControl itemControl = new ItemControl("AniApp",
+                "https://raw.githubusercontent.com/ProGraMajster/AniAppProject/refs/heads/master/AniAppProject/Resources/AppIcon/aniappprojecticon.png",
+                "com.programajster.aniappproject");
+
+            flowLayoutPanelContentApp.Controls.Add(itemControl);
         }
 
-        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            if(e.Shift && e.KeyCode == Keys.F12)
-            {
-                FormCreatorPackage formCreatorPackage = new FormCreatorPackage();
-                formCreatorPackage.Show();
-            }
+            FormCreatorPackage formCreatorPackage = new FormCreatorPackage();
+            formCreatorPackage.Show();
         }
     }
 }

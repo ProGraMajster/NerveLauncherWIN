@@ -36,6 +36,9 @@
             panelEx8 = new Controls.PanelEx();
             flowLayoutPanelEx3 = new Controls.FlowLayoutPanelEx();
             label3 = new Label();
+            panelEx7 = new Controls.PanelEx();
+            flowLayoutPanelExInstalled = new Controls.FlowLayoutPanelEx();
+            label2 = new Label();
             panelEx6 = new Controls.PanelEx();
             panelEx4 = new Controls.PanelEx();
             buttonEx3 = new Controls.ButtonEx();
@@ -46,10 +49,12 @@
             buttonEx2 = new Controls.ButtonEx();
             buttonEx1 = new Controls.ButtonEx();
             button1 = new Button();
+            progressBar1 = new ProgressBar();
             panelEx1.SuspendLayout();
             flowLayoutPanelEx1.SuspendLayout();
             panelEx5.SuspendLayout();
             panelEx8.SuspendLayout();
+            panelEx7.SuspendLayout();
             panelEx4.SuspendLayout();
             panelEx2.SuspendLayout();
             panelEx3.SuspendLayout();
@@ -75,6 +80,7 @@
             flowLayoutPanelEx1.AutoScroll = true;
             flowLayoutPanelEx1.Controls.Add(panelEx5);
             flowLayoutPanelEx1.Controls.Add(panelEx8);
+            flowLayoutPanelEx1.Controls.Add(panelEx7);
             flowLayoutPanelEx1.Dock = DockStyle.Fill;
             flowLayoutPanelEx1.Location = new Point(60, 42);
             flowLayoutPanelEx1.Name = "flowLayoutPanelEx1";
@@ -85,6 +91,7 @@
             // panelEx5
             // 
             panelEx5.BackColor = Color.FromArgb(25, 25, 25);
+            panelEx5.Controls.Add(progressBar1);
             panelEx5.Controls.Add(flowLayoutPanelContentApp);
             panelEx5.Controls.Add(label1);
             panelEx5.Dock = DockStyle.Top;
@@ -156,6 +163,43 @@
             label3.TabIndex = 0;
             label3.Text = "Gry";
             label3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // panelEx7
+            // 
+            panelEx7.BackColor = Color.FromArgb(25, 25, 25);
+            panelEx7.Controls.Add(flowLayoutPanelExInstalled);
+            panelEx7.Controls.Add(label2);
+            panelEx7.Dock = DockStyle.Top;
+            panelEx7.Location = new Point(23, 421);
+            panelEx7.MinimumSize = new Size(850, 193);
+            panelEx7.Name = "panelEx7";
+            panelEx7.Padding = new Padding(10);
+            panelEx7.Size = new Size(850, 193);
+            panelEx7.TabIndex = 5;
+            // 
+            // flowLayoutPanelExInstalled
+            // 
+            flowLayoutPanelExInstalled.BackColor = Color.FromArgb(22, 22, 22);
+            flowLayoutPanelExInstalled.Dock = DockStyle.Bottom;
+            flowLayoutPanelExInstalled.Location = new Point(10, 53);
+            flowLayoutPanelExInstalled.Name = "flowLayoutPanelExInstalled";
+            flowLayoutPanelExInstalled.Padding = new Padding(10, 2, 0, 0);
+            flowLayoutPanelExInstalled.Size = new Size(830, 130);
+            flowLayoutPanelExInstalled.TabIndex = 1;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Dock = DockStyle.Top;
+            label2.FlatStyle = FlatStyle.Flat;
+            label2.Font = new Font("Segoe UI", 12F);
+            label2.Location = new Point(10, 10);
+            label2.Name = "label2";
+            label2.Padding = new Padding(6);
+            label2.Size = new Size(122, 33);
+            label2.TabIndex = 0;
+            label2.Text = "Zainstalowane";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panelEx6
             // 
@@ -279,6 +323,14 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // progressBar1
+            // 
+            progressBar1.Location = new Point(133, 19);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(204, 23);
+            progressBar1.Style = ProgressBarStyle.Marquee;
+            progressBar1.TabIndex = 2;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -299,6 +351,8 @@
             panelEx5.PerformLayout();
             panelEx8.ResumeLayout(false);
             panelEx8.PerformLayout();
+            panelEx7.ResumeLayout(false);
+            panelEx7.PerformLayout();
             panelEx4.ResumeLayout(false);
             panelEx2.ResumeLayout(false);
             panelEx3.ResumeLayout(false);
@@ -325,5 +379,9 @@
         private TextBox textBox1;
         private Controls.FlowLayoutPanelEx flowLayoutPanelEx3;
         private Button button1;
+        private Controls.PanelEx panelEx7;
+        private Controls.FlowLayoutPanelEx flowLayoutPanelExInstalled;
+        private Label label2;
+        private ProgressBar progressBar1;
     }
 }

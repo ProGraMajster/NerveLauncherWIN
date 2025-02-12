@@ -20,6 +20,8 @@ namespace NerveLauncherWIN
         public static string PathTemp = PathMain + "Temp\\";
         public static string PathContent = PathMain + "Content\\";
 
+        public static EventHandler InstalledPackageChanged;
+
         public static InstalledPackage InstalledPackage;
         public static void Init()
         {
@@ -35,6 +37,8 @@ namespace NerveLauncherWIN
                 LoadInfoInstalledPackage();
             }
         }
+
+
 
         static void CheckDir(string path)
         {
@@ -96,6 +100,7 @@ namespace NerveLauncherWIN
 
             string json = JsonSerializer.Serialize(InstalledPackage, typeof(InstalledPackage), new JsonSerializerOptions() { WriteIndented = true });
             File.WriteAllText(PathContent + "installedPackage.json", json);
+            InstalledPackageChanged.Invoke(null, EventArgs.Empty);
         }
 
         public static void UpdateFIP(string id, NerveLauncher.Data.NervePackage nervePackage)
@@ -141,6 +146,7 @@ namespace NerveLauncherWIN
                 InstalledPackage.Packages.Add(nervePackage);
                 string json = JsonSerializer.Serialize(InstalledPackage, typeof(InstalledPackage), new JsonSerializerOptions() { WriteIndented = true });
                 File.WriteAllText(PathContent + "installedPackage.json", json);
+                InstalledPackageChanged.Invoke(null, EventArgs.Empty);
             }
             catch(Exception ex)
             {

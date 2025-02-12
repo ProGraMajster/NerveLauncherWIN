@@ -1,5 +1,6 @@
 ﻿using NerveLauncherWIN.Controls;
 using NerveLauncherWIN.Dev;
+using Octokit;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,8 +10,11 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Application = System.Windows.Forms.Application;
 
 namespace NerveLauncherWIN
 {
@@ -19,6 +23,19 @@ namespace NerveLauncherWIN
         public FormMain()
         {
             InitializeComponent();
+            client = new GitHubClient(new ProductHeaderValue("NerveLauncherWIN"));
+            ContentManager.InstalledPackageChanged += ((s, e) =>
+            {
+                flowLayoutPanelExInstalled.Controls.Clear();
+                foreach (var item in ContentManager.InstalledPackage.Packages)
+                {
+                    ItemControl itemControl = new ItemControl(item);
+                    this.Invoke(() =>
+                    {
+                        flowLayoutPanelExInstalled.Controls.Add(itemControl);
+                    });
+                }
+            });
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -89,14 +106,89 @@ namespace NerveLauncherWIN
             }
         }
 
+        GitHubClient client;
+        Octokit.Repository repo;
         private void FormMain_Load(object sender, EventArgs e)
         {
+            progressBar1.Show();
             ContentManager.Init();
+            foreach (var item in ContentManager.InstalledPackage.Packages)
+            {
+                ItemControl itemControl = new ItemControl(item);
+                flowLayoutPanelExInstalled.Controls.Add(itemControl);
+            }
+
+
+            /*
+
             ItemControl itemControl = new ItemControl("AniApp",
                 "https://raw.githubusercontent.com/ProGraMajster/AniAppProject/refs/heads/master/AniAppProject/Resources/AppIcon/aniappprojecticon.png",
                 "com.programajster.aniappproject");
 
             flowLayoutPanelContentApp.Controls.Add(itemControl);
+
+            */
+
+
+            repo = client.Repository.Get("ProGraMajster", "NerveLauncher.DataContent").Result;
+            if (repo == null)
+            {
+                Debug.WriteLine("Repository not found");
+            }
+            else
+            {
+                Debug.WriteLine("Repository found");
+            }
+            var list = client.Repository.Content.GetAllContents("ProGraMajster", "NerveLauncher.DataContent", "NerveLauncher.DataContent/PackageList").Result;
+            HttpClient httpClient = new HttpClient();
+            List<string> strings = new List<string>();
+            foreach (var item in list)
+            {
+                string r = httpClient.GetStringAsync(item.DownloadUrl).Result;
+                if (r != null)
+                {
+                    strings.Add(r);
+                }
+            }
+
+            Thread thread = new(() =>
+            {
+                try
+                {
+                    var list = SerializePackaged(strings);
+                    if(list == null)
+                    {
+                        return;
+                    }
+                    foreach (var item in list)
+                    {
+                        this.Invoke(() =>
+                        {
+                            NerveLauncherWIN.Controls.ItemControl itemControl = new NerveLauncherWIN.Controls.ItemControl(item);
+                            flowLayoutPanelContentApp.Controls.Add(itemControl);
+                            progressBar1.Hide();
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                }
+            });
+            thread.Start();
+        }
+
+        List<NerveLauncher.Data.NervePackage> SerializePackaged(List<string> strings)
+        {
+            List<NerveLauncher.Data.NervePackage> nervePackages = new List<NerveLauncher.Data.NervePackage>();
+            JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions();
+            jsonSerializerOptions.WriteIndented = true;
+            foreach (var item in strings)
+            {
+                NerveLauncher.Data.NervePackage np = JsonSerializer.Deserialize<NerveLauncher.Data.NervePackage>(item, jsonSerializerOptions);
+                nervePackages.Add(np);
+            }
+            return nervePackages;
         }
 
         private void button1_Click(object sender, EventArgs e)

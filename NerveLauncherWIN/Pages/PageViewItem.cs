@@ -28,6 +28,12 @@ namespace NerveLauncherWIN.Pages
             InitializeComponent();
             PackageIdentifier = packageidentifier;
         }
+        public PageViewItem(NerveLauncher.Data.NervePackage nervePackage)
+        {
+            InitializeComponent();
+            NervePackage = nervePackage;
+            PackageIdentifier = nervePackage.PackageIdentifier;
+        }
 
         private void buttonEx1_Click(object sender, EventArgs e)
         {
@@ -58,10 +64,16 @@ namespace NerveLauncherWIN.Pages
                             buttonAction.Text = "Zaktualizuj";
                         }
                     }
+                    else
+                    {
+                        NervePackage = r;
+                        labelVersion.Text = r.DisplayVersion;
+                    }
                 }
                 else
                 {
                     NervePackage = r;
+                    labelVersion.Text = r.DisplayVersion;
                 }
                 progressBar1.Visible = false;
             }
@@ -82,17 +94,21 @@ namespace NerveLauncherWIN.Pages
             }
             NervePackage = item;
             STATUS = "INSTALED";
-            buttonAction.Text = "Uruchom";
-            buttonManage.Visible = true;
-            labelVersion.Text = item.DisplayVersion;
+            this.Invoke(() =>
+            {
+                buttonAction.Text = "Uruchom";
+                buttonManage.Visible = true;
+                labelVersion.Text = item.DisplayVersion;
+            });
         }
 
         void Uninstall()
         {
             Directory.Delete(ContentManager.PathContent+PackageIdentifier, true);
             ContentManager.UninstallFIP(PackageIdentifier);
-            CheckStatusLocal();
             panelManage.Hide();
+            Thread.Sleep(100);
+            CheckStatusLocal();
         }
 
 
@@ -291,11 +307,12 @@ namespace NerveLauncherWIN.Pages
                 labelStatusAction.Text = "Pobrano!";
                 //progressBar1.Style = ProgressBarStyle.Marquee;
                 progressBarDownloaded.Value = 0;
-
+                panelDowload.Hide();
             });
             T();
             ContentManager.AddToFIP(
                 NervePackage);
+            CheckStatusLocal();
         }
 
         private void Downloader_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)

@@ -57,6 +57,28 @@ namespace NerveLauncherWIN.Controls
         {
             InitializeComponent();
             NervePackage = package;
+            try
+            {
+                if (!string.IsNullOrEmpty(package.Name))
+                {
+                    Title = package.Name;
+                    labelNamePackage.Text = package.Name;
+                }
+                if (!string.IsNullOrEmpty(package.PackageIdentifier))
+                {
+                    PACKAGE = package.PackageIdentifier;
+                }
+                if (!string.IsNullOrEmpty(package.IconLink))
+                {
+                    ImageLink = package.IconLink;
+                    pictureBoxImagePackage.ImageLocation = package.IconLink;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private void pictureBoxImagePackage_Click(object sender, EventArgs e)
@@ -66,15 +88,30 @@ namespace NerveLauncherWIN.Controls
 
         void OpenPage(string PackageIdentifier)
         {
-            NerveLauncherWIN.Pages.PageViewItem pageViewItem = new Pages.PageViewItem(PackageIdentifier);
-            pageViewItem.Dock = DockStyle.Fill;
-            FormMain formMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
-            if (formMain == null)
+            if (NervePackage == null)
             {
-                return;
+                NerveLauncherWIN.Pages.PageViewItem pageViewItem = new Pages.PageViewItem(PackageIdentifier);
+                pageViewItem.Dock = DockStyle.Fill;
+                FormMain formMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
+                if (formMain == null)
+                {
+                    return;
+                }
+                formMain.Controls.Add(pageViewItem);
+                pageViewItem.BringToFront();
             }
-            formMain.Controls.Add(pageViewItem);
-            pageViewItem.BringToFront();
+            else
+            {
+                NerveLauncherWIN.Pages.PageViewItem pageViewItem = new Pages.PageViewItem(NervePackage);
+                pageViewItem.Dock = DockStyle.Fill;
+                FormMain formMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
+                if (formMain == null)
+                {
+                    return;
+                }
+                formMain.Controls.Add(pageViewItem);
+                pageViewItem.BringToFront();
+            }
         }
 
         private void ItemControl_Click(object sender, EventArgs e)
